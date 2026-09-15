@@ -90,3 +90,11 @@ Code, API names, comments, logs, error messages, and technical documentation mus
 - Slang, emojis, and non-ASCII characters are strictly prohibited.
 - Industry-standard technical acronyms and abbreviations (such as API, ETL, DB, JSON, REST) are permitted.
 - Custom, ambiguous, or informal abbreviations are prohibited—identifiers, variable names, and documentation must remain explicit and clear.
+
+## 12. Controlled versioning and protected history
+
+All platform code and infrastructure must be managed in version control with explicit gatekeeping.
+
+- Direct pushes to release or production branches are strictly forbidden; all changes must arrive via isolated feature branches and peer-reviewed pull requests.
+- Version history must remain linear, audited, and traceable to an approved specification change.
+- Automated quality gates and test suites must pass before any branch is merged.
