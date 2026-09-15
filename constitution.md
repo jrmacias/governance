@@ -42,48 +42,48 @@ around. Changing that promise is an explicit governance decision, never an infor
 - Specifications change only upon explicit approval by the project owner, after proposed changes and their system impact are documented and discussed.
 - Every behavioral change updates the specification, its code implementation, and its automated tests within the same change.
 
-## 4. Quality bars are defined per system
+## 3. Quality bars are defined per system
 
 Each system defines and documents its quality bar: language and tool
 versions, formatting and linting standards, and the test framework. The
 bar is applied to every change. (Example: rest-api defines a python
 3.12, black/isort/ruff, pytest bar in its `AGENTS.md`.)
 
-## 5. Tests required
+## 4. Tests required
 
 - Every implemented feature must have automated tests where practical.
 - Requirements that depend on external services (data stores, message queues, cluster services) must have explicit integration tests.
 - Tests as a gate: every task ends with passing tests. Moving forward with failing tests is forbidden.
 
-## 6. Minimal stack
+## 5. Minimal stack
 
 No dependency, framework, or service is added when the required functionality can be implemented with the existing stack.
 
-## 7. No magic
+## 6. No magic
 
 Every behavior must be explicit and documented. No behavior is hidden or
 implicit.
 
-## 8. No silent failures and sanitized logging
+## 7. No silent failures and sanitized logging
 
 Every error must be captured, logged, and reported. No error is ignored, caught without handling, or silently swallowed.
 
 - All error details, stack traces, and exception dumps must be sanitized before being written to log sinks to guarantee no clinical data, patient identifiers (PII/PHI), or sensitive credentials are leaked.
 - Error logs must capture necessary diagnostic context while explicitly stripping or masking payload bodies and raw query parameters that could contain confidential data.
 
-## 9. Controlled persistence
+## 8. Controlled persistence
 
 Persistent data must have a defined format, version, and validation.
 Configuration changes must never silently corrupt existing data.
 
-## 10. No hard-coded values and fail-safe configuration
+## 9. No hard-coded values and fail-safe configuration
 
 Every value, path, endpoint, or environment setting that may change across environments must be configurable via external configuration or environment variables, never hard-coded in source code.
 
 - Non-sensitive operational settings should provide safe, sensible defaults.
 - Critical configurations (such as database endpoints, credentials, infrastructure targets, and environment flags) must **never** fall back to implicit defaults. If a critical value is missing at startup, the system must fail fast with a clear error message to prevent accidental connections to incorrect or insecure states.
 
-## 12. Single language and standardized terminology
+## 11. Single language and standardized terminology
 
 Code, API names, comments, logs, error messages, and technical documentation must be written exclusively in English using plain ASCII characters.
 
