@@ -19,33 +19,28 @@ document, system-specific principles live in the system's own file.
 This constitution changes only through explicit approval by the project
 owner, for the same reason as specifications.
 
-## 1. Data sensitivity comes first
+## 1. Security & Data Sensitivity comes first
 
-The platform serves clinical cohort data. Security and controlled access
-out-rank convenience, speed, and feature completeness in every trade-off.
+The platform serves clinical cohort data. Security, privacy, and strict access controls out-rank convenience, speed, and feature completeness in every trade-off.
 
-- no clinical data, patient identifiers, or credentials in code, logs, tests, or examples
-- access to the data layer is least-privilege by default
-- when in doubt about whether data may be stored, logged, or returned, it may not
+- No clinical data, patient identifiers, credentials, API tokens, or connection strings in code, repositories, logs, tests, or examples.
+- Secrets never live unencrypted in source control; cluster secrets are managed exclusively through sealed secrets (see the `helm-chart/sealed-secrets` workspace directory).
+- Example files must only demonstrate data shape, never real values.
+- Access to the data layer and system boundaries is least-privilege by default.
+- When in doubt about whether data may be stored, logged, transmitted, or returned, it must not be.
 
 ## 2. The specification is the source of truth
 
-Code exists to implement an approved specification, never the other way
-around.
-
-- no code is written that is not explicitly required by the active specification. If a decision is missing, stop work and ask.
 - every behavioral change must be explicitly accepted by a human developer before implementation
 - every behavioral change updates the specification and its tests in the same change
 - when a requirement is missing from the specification, the specification is updated before the code
 
-## 3. The project owner approves specification changes
+Code exists solely to implement an approved specification, which defines what the system promises, never the other way
+around. Changing that promise is an explicit governance decision, never an informal code edit.
 
-The specification defines what the system promises. Changing that promise
-is a decision, not an edit.
-
-- a specification changes only on an explicit request from the project owner
-- the project owner approves every specification change before it is implemented
-- proposed changes are discussed with their impact on the system made explicit
+- No code is written unless explicitly required by the active specification. If a requirement or decision is missing, stop work until the specification is updated.
+- Specifications change only upon explicit approval by the project owner, after proposed changes and their system impact are documented and discussed.
+- Every behavioral change updates the specification, its code implementation, and its automated tests within the same change.
 
 ## 4. Quality bars are defined per system
 
@@ -83,12 +78,6 @@ Configuration changes must never silently corrupt existing data.
 
 - Every value, path, etc. that may change must be configurable.
 - Every configuration must have a default value.
-
-## 11. No secrets in the repository
-
-- credentials, tokens, and connection strings never live in the repository
-- cluster secrets are managed with sealed secrets (see the `helm-chart/sealed-secrets` directory of the workspace)
-- example files show the shape of a value, never a real one
 
 ## 12. Single language
 
