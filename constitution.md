@@ -64,23 +64,29 @@ No dependency, framework, or service is added when the required functionality ca
 Every behavior must be explicit and documented. No behavior is hidden or
 implicit.
 
-## 8. No silent failures
+## 8. No silent failures and sanitized logging
 
-Every error must be logged and reported. No error is ignored or silently
-swallowed.
+Every error must be captured, logged, and reported. No error is ignored, caught without handling, or silently swallowed.
+
+- All error details, stack traces, and exception dumps must be sanitized before being written to log sinks to guarantee no clinical data, patient identifiers (PII/PHI), or sensitive credentials are leaked.
+- Error logs must capture necessary diagnostic context while explicitly stripping or masking payload bodies and raw query parameters that could contain confidential data.
 
 ## 9. Controlled persistence
 
 Persistent data must have a defined format, version, and validation.
 Configuration changes must never silently corrupt existing data.
 
-## 10. No hard-coded values
+## 10. No hard-coded values and fail-safe configuration
 
-- Every value, path, etc. that may change must be configurable.
-- Every configuration must have a default value.
+Every value, path, endpoint, or environment setting that may change across environments must be configurable via external configuration or environment variables, never hard-coded in source code.
 
-## 12. Single language
+- Non-sensitive operational settings should provide safe, sensible defaults.
+- Critical configurations (such as database endpoints, credentials, infrastructure targets, and environment flags) must **never** fall back to implicit defaults. If a critical value is missing at startup, the system must fail fast with a clear error message to prevent accidental connections to incorrect or insecure states.
 
-Code, API names, comments, logs, error messages, and technical
-documentation must be written in english, with no abbreviations, acronyms,
-slang, emojis, or non-ASCII characters.
+## 12. Single language and standardized terminology
+
+Code, API names, comments, logs, error messages, and technical documentation must be written exclusively in English using plain ASCII characters.
+
+- Slang, emojis, and non-ASCII characters are strictly prohibited.
+- Industry-standard technical acronyms and abbreviations (such as API, ETL, DB, JSON, REST) are permitted.
+- Custom, ambiguous, or informal abbreviations are prohibited—identifiers, variable names, and documentation must remain explicit and clear.
