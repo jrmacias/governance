@@ -85,11 +85,12 @@ Every value, path, endpoint, or environment setting that may change across envir
 
 ## 11. Single language and standardized terminology
 
-Code, API names, comments, logs, error messages, and technical documentation must be written exclusively in English using plain ASCII characters.
+Code, API names, comments, logs, error messages, and technical documentation must be written in English using plain ASCII characters.
 
 - Slang, emojis, and non-ASCII characters are strictly prohibited.
 - Industry-standard technical acronyms and abbreviations (such as API, ETL, DB, JSON, REST) are permitted.
 - Custom, ambiguous, or informal abbreviations are prohibited—identifiers, variable names, and documentation must remain explicit and clear.
+- Exception: requirement specifications may be written in Spanish, with non-ASCII characters permitted in those files. Requirement specifications live in `governance/specs/requirements/`, grouped by language (`en/`, `es/`). English remains the language of all code and technical documentation.
 
 ## 12. Controlled versioning and protected history
 
